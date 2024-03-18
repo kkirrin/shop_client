@@ -5,9 +5,11 @@ export const removeOverflowHiddenFromBody = () => {
 }
 
 // Функция для добавления класс overflow-hidden на body
-export const addOverflowHiddenToBody = () => {
+export const addOverflowHiddenToBody = (paddingRight = '') => {
   const body = document.querySelector('body') as HTMLBodyElement
   body.classList.add('overflow-hidden')
+  // Если есть padding то его и устанвливаем для body
+  paddingRight && (body.style.paddingRight = paddingRight)
 }
 
 // Получение ширины экрана и возвращение ее

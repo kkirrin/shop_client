@@ -4,6 +4,7 @@ import '../app/globalStyles/global.css';
 import '../app/globalStyles/header.css';
 import '../app/globalStyles/menu.css';
 import '../app/globalStyles/mobile-navbar.css'
+import '../app/globalStyles/catalogMenu.css'
 import Layout from '@/components/layouts/layout'
 
 
