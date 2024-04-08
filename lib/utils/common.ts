@@ -1,3 +1,5 @@
+import { closeSearchModal } from "@/context/modals"
+
 // Функция для удаления класса overflow-hidden c body
 export const removeOverflowHiddenFromBody = () => {
   const body = document.querySelector('body') as HTMLBodyElement
@@ -18,4 +20,9 @@ export const getWindowWidth = () => {
   typeof window !== 'undefined' ? window : { innerWidth: 0} 
 
   return { windowWidth }
+}
+
+export const handleCloseSearchModal = () => {
+  closeSearchModal();
+  removeOverflowHiddenFromBody()
 }

@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { $catalogMenuIsOpen, closeCatalogMenu } from '@/context/modals'
 import useLang from '@/hooks/useLang'
 import { useMenuAnimation } from '@/hooks/useMenuAnimations'
-import { useStore } from 'effector-react'
+import { useUnit } from 'effector-react'
 import React, { useState } from 'react'
 import Header from './Header'
 import { removeOverflowHiddenFromBody } from '@/lib/utils/common'
@@ -17,7 +17,7 @@ import Link from 'next/link'
 
 const CatalogMenu = () => {
 
-  const catalogMenuIsOpen = useStore($catalogMenuIsOpen)
+  const catalogMenuIsOpen = useUnit($catalogMenuIsOpen)
   const [showClothList, setShowClothList] = useState(false)
   const [showAccessoriesList, setShowAccessoriesList] = useState(false)
   const [showSouvenirsList, setShowSouvenirsList] = useState(false)

@@ -1,14 +1,19 @@
 "use client"
  
+import { useStore, useUnit } from "effector-react";
+import Link from "next/link";
+import useLang from "@/hooks/useLang";
 import Menu from "./Menu";
 import Logo from "@/components/elements/Logo/Logo";
-import { openMenu } from "@/context/modals";
-import useLang from "@/hooks/useLang";
-import { addOverflowHiddenToBody } from "@/lib/utils/common";
-import Link from "next/link";
+import { $searchModal, openMenu, openSearchModal } from "@/context/modals";
+import { addOverflowHiddenToBody, handleCloseSearchModal } from "@/lib/utils/common";
+import CartPopup from "./CartPopup/CartPopup";
+
 
 const Header = () => {
   const { lang, translations} = useLang()
+
+  const searchModal = useUnit($searchModal)
 
   // Обработчик клика по кнопке
   const handleOpenMenu = () => {
@@ -16,10 +21,23 @@ const Header = () => {
     openMenu();
   }
 
+  // фунция для открытия модалки поиска товаров
+  const handleOpenSearchModal = () => {
+    openSearchModal();
+    addOverflowHiddenToBody();
+  }
+
   return (
     // стили глобальные т.к. header на всех страницах
     <header className='header'>
+      <div 
+        className={`header__search-overlay ${
+          searchModal  ? "overlay-active" : ""
+        }`}
+        onClick={handleCloseSearchModal}
+      />
     <div className='container header__container'>
+          {/* Каталог меню */}
           <button className="btn-reset header__burger" onClick={handleOpenMenu}>
             {translations[lang].header.menu_btn}
           </button>
@@ -31,6 +49,13 @@ const Header = () => {
           </div>
 
           <ul className="header__links list-reset">
+            <li className='header__links__item'>
+              {/* Кнопка поиска */}
+              <button
+                  className='btn-reset header__links__item__btn header__links__item__btn--search'
+                  onClick={handleOpenSearchModal}
+                />
+            </li>
             <li className='header__links__item'>
               <Link
                 href='/favorites'
@@ -53,10 +78,8 @@ const Header = () => {
             </li>
 
             <li className='header__links__item'>
-              <Link
-                className='header__links__item__btn header__links__item__btn--cart'
-                href='/cart'
-              />
+              {/* Попап для корзины */}
+              <CartPopup />
             </li>
 
             <li className="header__links__item header__links__item--profile">
